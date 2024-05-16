@@ -5,7 +5,7 @@ https://github.com/zenoamaro/react-quill
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import isEqual from 'lodash/isEqual';
+import { isEqual } from 'lodash-es';
 
 import Quill, { type EmitterSource, type Range as RangeStatic, QuillOptions as QuillOptionsStatic } from 'quill';
 import type DeltaStatic from 'quill-delta';
