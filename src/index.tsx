@@ -3,8 +3,7 @@ React-Quill
 https://github.com/zenoamaro/react-quill
 */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { createRef } from 'react';
 import { isEqual } from 'lodash-es';
 
 import Quill, { type EmitterSource, type Range as RangeStatic, QuillOptions as QuillOptionsStatic } from 'quill';
@@ -20,8 +19,6 @@ namespace ReactQuill {
   export type Range = RangeStatic | null;
 
   export interface QuillOptions extends QuillOptionsStatic {
-    scrollingContainer?: HTMLElement | string | undefined,
-    strict?: boolean | undefined,
     tabIndex?: number,
   }
 
@@ -60,7 +57,6 @@ namespace ReactQuill {
     placeholder?: string,
     preserveWhitespace?: boolean,
     readOnly?: boolean,
-    scrollingContainer?: string | HTMLElement,
     style?: React.CSSProperties,
     tabIndex?: number,
     theme?: string,
@@ -89,6 +85,7 @@ interface ReactQuillState {
 }
 
 class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
+  editingAreaRef = createRef<any>();
 
   static displayName = 'React Quill'
 
@@ -142,11 +139,6 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
   The Quill Editor instance.
   */
   editor?: Quill
-
-  /*
-  Reference to the element holding the Quill editing area.
-  */
-  editingArea?: React.ReactInstance | null
 
   /*
   Tracks the internal value of the Quill editor
@@ -312,7 +304,6 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
       modules: this.props.modules,
       placeholder: this.props.placeholder,
       readOnly: this.props.readOnly,
-      scrollingContainer: this.props.scrollingContainer,
       tabIndex: this.props.tabIndex,
       theme: this.props.theme,
     };
@@ -432,10 +423,7 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
   }
 
   getEditingArea(): HTMLElement {
-    if (!this.editingArea) {
-      throw new Error('Instantiating on missing editing area');
-    }
-    const element = ReactDOM.findDOMNode(this.editingArea);
+    const element = this.editingAreaRef.current;
     if (!element) {
       throw new Error('Cannot find element for editing area');
     }
@@ -454,9 +442,7 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
 
     const properties = {
       key: generation,
-      ref: (instance: React.ReactInstance | null) => {
-        this.editingArea = instance
-      },
+      ref: this.editingAreaRef,
     };
 
     if (React.Children.count(children)) {
