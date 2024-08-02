@@ -1,15 +1,3 @@
-ReactQuill [![npm](https://img.shields.io/npm/v/react-quill-new.svg)](https://www.npmjs.com/package/react-quill-new)
-[![npm downloads](https://img.shields.io/npm/dt/react-quill-new.svg?maxAge=2592000)](http://www.npmtrends.com/react-quill-new)
-==============================================================================
-
-This is fork of [react-quill](https://zenoamaro.github.io/react-quill/) that updates its QuillJS dependency from 1.3.7 to >=2.0.2 and makes some smaller changes for compatibility.
-
-If you are the maintainer of react-quill and have updated the original package, reach out to have this taken down.
-
-Original description follows below.
-
-==============================================================================
-
 A [Quill] component for [React].
 
 See a [live demo] or [Codepen](http://codepen.io/alexkrolick/pen/xgyOXQ/left?editors=0010#0).
