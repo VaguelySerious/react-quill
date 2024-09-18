@@ -55,12 +55,14 @@ Make sure you have `react` and `react-dom`, and some way to load styles, like [s
 
 ```sh
 npm install react-quill-new --save
+# or if using yarn
+yarn add react-quill-new
 ```
 
 ```jsx
 import React, { useState } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 
 function MyComponent() {
   const [value, setValue] = useState('');
@@ -106,7 +108,7 @@ This may vary depending how application is structured, directories or otherwise.
 Here's an example using [style-loader](https://www.npmjs.com/package/style-loader) for Webpack, or `create-react-app`, that will automatically inject the styles on the page:
 
 ```jsx
-import 'react-quill/dist/quill.snow.css';
+import 'react-quill-new/dist/quill.snow.css';
 ```
 
 ### Custom Toolbar
@@ -309,7 +311,7 @@ The component has two types of formats:
 <summary>Example Code</summary>
 
 ```js
-import ReactQuill, { Quill } from 'react-quill'; // ES6
+import ReactQuill, { Quill } from 'react-quill-new'; // ES6
 ```
 
 ```jsx
@@ -437,7 +439,7 @@ Use the [Toolbar Module](#default-toolbar-elements) or the [HTML Toolbar](#html-
 
 ```jsx
 // ES6
-import ReactQuill, { Quill } from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill-new';
 ```
 
 `Quill`
