@@ -5414,10 +5414,10 @@ quill-delta@^5.1.0:
     lodash.clonedeep "^4.5.0"
     lodash.isequal "^4.5.0"
 
-quill-ime-fork@~2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/quill-ime-fork/-/quill-ime-fork-2.0.2.tgz#782d60fad99d2e40b0e036b38cf26723f71a166a"
-  integrity sha512-Wi3mQk0ndzAMcggtP/DLUjpgK7hwwM+k+pe/dpLkR+plSkTkgQG3fS3vD7Pewh7NPkfLyPwPaGTc9QFdeaRzqg==
+quill-ime-fork@~2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/quill-ime-fork/-/quill-ime-fork-2.0.3.tgz#96f1a4431e36fb0e2c5e3cd2ecb5e1f1631ebad7"
+  integrity sha512-AuO4hRPSkcCXqga42tmMK4MKREX11ANxly8ofiIiVXbJlDgaxF16hzaPND7j5GkVlMiNRctG+qoXN4Ce3bwO7g==
   dependencies:
     eventemitter3 "^5.0.1"
     lodash-es "^4.17.21"
