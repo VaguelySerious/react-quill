@@ -16,7 +16,7 @@
   "scripts": {
     "build": "npm run build:lib && npm run build:css",
     "build:lib": "tsc",
-    "build:css": "cpx 'node_modules/quill/dist/quill.*.css' dist",
+    "build:css": "cpx 'node_modules/quill/dist/quill.*.css*' dist",
     "watch": "tsc --watch",
     "pretest": "npm run build",
     "test": "npm run test:unit && npm run test:coverage && npm run test:browser",
