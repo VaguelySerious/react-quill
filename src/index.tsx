@@ -289,6 +289,14 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
   destroyEditor(): void {
     if (!this.editor) return;
     this.unhookEditor(this.editor);
+    // There is a buggy interaction between Quill and React 18+ strict mode, where
+    // strict mode re-renders this component twice in the span of time that Quill
+    // is mounting. This causes the toolbar to be rendered twice.
+    // We check for and remove the toolbar if it exists.
+    const leftOverToolbar = document.querySelector('.ql-toolbar');
+    if (leftOverToolbar) {
+      leftOverToolbar.remove();
+    }
     delete this.editor;
   }
 
