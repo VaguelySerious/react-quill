@@ -295,8 +295,13 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
     // We check for and remove the toolbar if it exists, but only if we're not using
     // a custom external toolbar (which we don't want to remove).
     const toolbar = this.props.modules?.toolbar;
-    if (!toolbar || typeof toolbar !== 'object' || !('container' in toolbar)) {
-      const leftOverToolbar = document.querySelector(".ql-toolbar");
+    if (
+      !toolbar ||
+      typeof toolbar !== 'object' ||
+      !('container' in toolbar) ||
+      typeof toolbar !== 'string'
+    ) {
+      const leftOverToolbar = document.querySelector('.ql-toolbar');
       if (leftOverToolbar) {
         leftOverToolbar.remove();
       }
