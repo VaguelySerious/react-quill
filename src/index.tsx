@@ -6,7 +6,7 @@ https://github.com/zenoamaro/react-quill
 import React, { createRef } from 'react';
 import { isEqual } from 'lodash-es';
 
-import Quill, { type EmitterSource, type Range as RangeStatic, QuillOptions as QuillOptionsStatic } from 'quill';
+import Quill, { type EmitterSource, type Range as RangeStatic, Delta, QuillOptions as QuillOptionsStatic } from 'quill';
 import type DeltaStatic from 'quill-delta';
 
 export { Quill }
@@ -36,6 +36,14 @@ namespace ReactQuill {
       source: EmitterSource,
       editor: UnprivilegedEditor,
     ): void,
+    onChangeDebounced?(
+      value: string,
+      editorContents: Delta,
+      delta: Delta,
+      source: EmitterSource,
+      editor: UnprivilegedEditor,
+    ): void,
+    debounceTimeMs?: number,
     onChangeSelection?(
       selection: Range,
       source: EmitterSource,
@@ -105,6 +113,7 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
     'bounds',
     'theme',
     'children',
+    'debounceTimeMs',
   ]
 
   /*
@@ -118,6 +127,7 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
     'placeholder',
     'tabIndex',
     'onChange',
+    'onChangeDebounced',
     'onChangeSelection',
     'onFocus',
     'onBlur',
@@ -140,6 +150,21 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
   The Quill Editor instance.
   */
   editor?: Quill
+
+  /*
+  Timer for debounced changes
+  */
+  debounceTimer?: number
+
+  /*
+  Previous content for debounced changes
+  */
+  prevEditorContents?: Delta | null
+
+  /*
+  Pending delta for debounced changes
+  */
+  pendingDelta?: Delta | null
 
   /*
   Tracks the internal value of the Quill editor
@@ -247,6 +272,10 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
   }
 
   componentWillUnmount() {
+    // Clear any debounce timer
+    if (this.debounceTimer) {
+      window.clearTimeout(this.debounceTimer);
+    }
     this.destroyEditor();
   }
 
@@ -398,6 +427,9 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
     } else {
       editor.setContents(value);
     }
+    if (this.prevEditorContents == null) {
+      this.prevEditorContents = editor.getContents();
+    }
     postpone(() => this.setEditorSelection(editor, sel));
   }
 
@@ -537,6 +569,29 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
 
       this.value = nextContents;
       this.props.onChange?.(value, delta, source, editor);
+
+      // Handle debounced change if the callback exists
+      if (this.props.onChangeDebounced) {
+        // Clear any existing timer
+        if (this.debounceTimer) {
+          window.clearTimeout(this.debounceTimer);
+        }
+
+        if (this.prevEditorContents == null) {
+          this.prevEditorContents = new Delta();
+        }
+        if (this.pendingDelta == null) {
+          this.pendingDelta = new Delta();
+        }
+        this.pendingDelta = this.pendingDelta.compose(delta);
+        // Set a new timer
+        this.debounceTimer = window.setTimeout(() => {
+          this.props.onChangeDebounced?.(value, this.prevEditorContents!, this.pendingDelta!, source, editor);
+          this.prevEditorContents = editor.getContents();
+          this.pendingDelta = null;
+          this.debounceTimer = undefined;
+        }, this.props.debounceTimeMs ?? 1000);
+      }
     }
   }
 
