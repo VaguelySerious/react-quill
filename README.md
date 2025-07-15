@@ -41,9 +41,9 @@ Note: This is fork of [react-quill](https://zenoamaro.github.io/react-quill/) th
 
 💯 **ReactQuill v3**
 
-This is the documentation fro ReactQuill 3, which is written in TypeScript and supports React 16+, and runs Quill ^2.0.2. We work hard to avoid introducing any behavioral changes. For the vast majority of the cases, no migration from `react-quill@1` or `react-quill@2` is necessary at all. However, be sure to read the [migration guide](#upgrading-to-reactquill-v3).
+This is the documentation for ReactQuill 3, which is written in TypeScript and supports React 16+, and runs Quill ^2.0.2. We work hard to avoid introducing any behavioral changes. For the vast majority of the cases, no migration from `react-quill@1` or `react-quill@2` is necessary at all. However, be sure to read the [migration guide](#upgrading-to-reactquill-v3).
 
-We expect this release to be a drop-in upgrade – if that isn't the case, please [file an issue](/../../issues/new) with the `v2` labelbb.
+We expect this release to be a drop-in upgrade – if that isn't the case, please [file an issue](/../../issues/new) with the `v2` label.
 
 ---
 
