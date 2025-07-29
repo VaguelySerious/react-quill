@@ -87,6 +87,7 @@ interface ReactQuillState {
 
 class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
   editingAreaRef = createRef<any>();
+  containerRef = createRef<any>();
 
   static displayName = 'React Quill'
 
@@ -302,7 +303,7 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
         typeof toolbar.container === "string") ||
       typeof toolbar === "string";
     if (!usingExternalToolbar) {
-      const leftOverToolbar = document.querySelector(".ql-toolbar");
+      const leftOverToolbar = this.containerRef.current?.querySelector(".ql-toolbar");
       if (leftOverToolbar) {
         leftOverToolbar.remove();
       }
@@ -481,6 +482,7 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
   render() {
     return (
       <div
+        ref={this.containerRef}
         id={this.props.id}
         style={this.props.style}
         key={this.state.generation}
