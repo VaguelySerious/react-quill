@@ -3,14 +3,14 @@ React-Quill
 https://github.com/zenoamaro/react-quill
 */
 
-import React, { createRef } from 'react';
 import { isEqual } from 'lodash-es';
+import React, { createRef } from 'react';
 
 import Quill, { type EmitterSource, type Range as RangeStatic, QuillOptions as QuillOptionsStatic } from 'quill';
 import type DeltaStatic from 'quill-delta';
 
-export { Quill }
-export type { DeltaStatic, EmitterSource, RangeStatic, QuillOptionsStatic }
+export { Quill };
+export type { DeltaStatic, EmitterSource, QuillOptionsStatic, RangeStatic };
 
 // Merged namespace hack to export types along with default object
 // See: https://github.com/Microsoft/TypeScript/issues/2719
@@ -262,6 +262,11 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
       this.regenerationSnapshot = {delta, selection};
       this.setState({generation: this.state.generation + 1});
       this.destroyEditor();
+    }
+
+    // Placeholder updates are handled in-place, without regenerating the editor.
+    if (this.editor && prevProps.placeholder !== this.props.placeholder) {
+      this.editor.root.dataset.placeholder = this.props.placeholder || "";
     }
 
     // The component has been regenerated, so it must be re-instantiated, and
