@@ -509,7 +509,7 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
   ) => {
     if (eventName === 'text-change') {
       this.onEditorChangeText?.(
-        this.editor!.root.innerHTML,
+        this.editor!.getSemanticHTML(),
         rangeOrDelta as DeltaStatic,
         source,
         this.unprivilegedEditor!
@@ -535,7 +535,7 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
     // so that value comparisons will be more stable and predictable.
     const nextContents = this.isDelta(this.value)
       ? editor.getContents()
-      : editor.getHTML();
+      : editor.getSemanticHTML();
 
     if (nextContents !== this.getEditorContents()) {
       // Taint this `delta` object, so we can recognize whether the user
