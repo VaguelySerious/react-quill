@@ -27,6 +27,15 @@ const filesToCopy = [
     from: path.resolve(pkg, 'dist', 'quill.core.css'),
     to: path.resolve(assetsDir, 'quill.core.css'),
   },
+  // Demo-only build of react-quill-new pinned to quill@1.3.7
+  {
+    from: path.resolve(repoRoot, 'packages', 'react-quill-new-quill1-demo', 'dist', 'react-quill.js'),
+    to: path.resolve(assetsDir, 'react-quill-quill1.js'),
+  },
+  {
+    from: path.resolve(repoRoot, 'packages', 'react-quill-new-quill1-demo', 'dist', 'react-quill.js.map'),
+    to: path.resolve(assetsDir, 'react-quill-quill1.js.map'),
+  },
 ];
 
 fs.mkdirSync(assetsDir, { recursive: true });
