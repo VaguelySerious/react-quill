@@ -9,16 +9,15 @@
 /tmp
 
 # Dependencies
-/node_modules
+node_modules
 
 # Compiled files
-/dist
-/lib
+dist
+lib
 
 # Packaging artifacts
 /react-quill-*.tgz
 /package
 
-# Test artifacts
-.cypress/screenshots
-.cypress/videos
+# Turbo artifacts
+.turbo

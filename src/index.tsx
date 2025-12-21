@@ -1,6 +1,6 @@
 /*
 React-Quill
-https://github.com/zenoamaro/react-quill
+https://github.com/vaguelyserious/react-quill
 */
 
 import { isEqual } from 'lodash-es';

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2020",
+    "module": "ES2020",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "lib": ["dom", "esnext"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["node"]
+  }
+}
+
+

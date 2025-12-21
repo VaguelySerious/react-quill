@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React 16 + Quill 2</title>
+    <link rel="stylesheet" href="/assets/quill.snow.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- React 16 UMD -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <!-- react-quill-new dist bundle -->
+    <script src="/assets/react-quill.js"></script>
+    <script src="/_shared/demo-reactquill.js"></script>
+    <script>
+      mountReactQuill(document.getElementById('app'), { title: 'React 16 + Quill 2' });
+    </script>
+  </body>
+</html>
+
+
