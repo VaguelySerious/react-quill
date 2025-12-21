@@ -17635,22 +17635,6 @@ var ReactQuill = (function (exports, React) {
 	  'ui/tooltip': Tooltip
 	}, true);
 
-	var __defProp = Object.defineProperty;
-	var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-	var __hasOwnProp = Object.prototype.hasOwnProperty;
-	var __propIsEnum = Object.prototype.propertyIsEnumerable;
-	var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-	var __spreadValues = (a, b) => {
-	  for (var prop in b || (b = {}))
-	    if (__hasOwnProp.call(b, prop))
-	      __defNormalProp(a, prop, b[prop]);
-	  if (__getOwnPropSymbols)
-	    for (var prop of __getOwnPropSymbols(b)) {
-	      if (__propIsEnum.call(b, prop))
-	        __defNormalProp(a, prop, b[prop]);
-	    }
-	  return a;
-	};
 	class ReactQuill extends React.Component {
 	  constructor(props) {
 	    super(props);
@@ -17932,14 +17916,14 @@ var ReactQuill = (function (exports, React) {
 	  renderEditingArea() {
 	    const { children, preserveWhitespace } = this.props;
 	    const { generation } = this.state;
-	    const properties = {
-	      key: generation,
-	      ref: this.editingAreaRef
-	    };
 	    if (React.Children.count(children)) {
-	      return React.cloneElement(React.Children.only(children), properties);
+	      return React.cloneElement(React.Children.only(children), {
+	        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+	        key: generation,
+	        ref: this.editingAreaRef
+	      });
 	    }
-	    return preserveWhitespace ? /* @__PURE__ */ jsxRuntimeExports.jsx("pre", __spreadValues({}, properties)) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", __spreadValues({}, properties));
+	    return preserveWhitespace ? /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { ref: this.editingAreaRef }, generation) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: this.editingAreaRef }, generation);
 	  }
 	  render() {
 	    var _a;

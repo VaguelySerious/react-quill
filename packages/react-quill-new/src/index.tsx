@@ -466,16 +466,20 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
     const { children, preserveWhitespace } = this.props;
     const { generation } = this.state;
 
-    const properties = {
-      key: generation,
-      ref: this.editingAreaRef,
-    };
-
     if (React.Children.count(children)) {
-      return React.cloneElement(React.Children.only(children)!, properties);
+      // NOTE: React warns if `key` is passed via spread props. Pass it directly.
+      return React.cloneElement(React.Children.only(children)!, {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        key: generation as any,
+        ref: this.editingAreaRef,
+      });
     }
 
-    return preserveWhitespace ? <pre {...properties} /> : <div {...properties} />;
+    return preserveWhitespace ? (
+      <pre key={generation} ref={this.editingAreaRef} />
+    ) : (
+      <div key={generation} ref={this.editingAreaRef} />
+    );
   }
 
   render() {

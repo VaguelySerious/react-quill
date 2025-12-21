@@ -28,6 +28,7 @@ export default {
     file: 'dist/react-quill.js',
     format: 'iife',
     name: 'ReactQuill',
+    exports: 'named',
     sourcemap: true,
     globals: {
       react: 'React',
