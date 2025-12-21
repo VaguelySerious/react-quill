@@ -1,0 +1,22 @@
+**/node_modules/**
+**/dist/**
+**/lib/**
+**/.turbo/**
+**/.changeset/**/CHANGELOG.md
+
+# Vercel / tooling caches
+**/.vercel/**
+
+# Large/generated/minified assets
+docs/react-quill.js
+docs/quill.snow.js
+dist/react-quill.js
+apps/demo/public/assets/**
+packages/react-quill-new/dist/**
+packages/react-quill-new/lib/**
+
+# Lockfile formatting churn is not useful
+pnpm-lock.yaml
+
+
+

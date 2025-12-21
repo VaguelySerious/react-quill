@@ -7,11 +7,26 @@ const demoPublic = path.resolve(repoRoot, 'apps', 'demo', 'public');
 const assetsDir = path.resolve(demoPublic, 'assets');
 
 const filesToCopy = [
-  { from: path.resolve(pkg, 'dist', 'react-quill.js'), to: path.resolve(assetsDir, 'react-quill.js') },
-  { from: path.resolve(pkg, 'dist', 'react-quill.js.map'), to: path.resolve(assetsDir, 'react-quill.js.map') },
-  { from: path.resolve(pkg, 'dist', 'quill.snow.css'), to: path.resolve(assetsDir, 'quill.snow.css') },
-  { from: path.resolve(pkg, 'dist', 'quill.bubble.css'), to: path.resolve(assetsDir, 'quill.bubble.css') },
-  { from: path.resolve(pkg, 'dist', 'quill.core.css'), to: path.resolve(assetsDir, 'quill.core.css') },
+  {
+    from: path.resolve(pkg, 'dist', 'react-quill.js'),
+    to: path.resolve(assetsDir, 'react-quill.js'),
+  },
+  {
+    from: path.resolve(pkg, 'dist', 'react-quill.js.map'),
+    to: path.resolve(assetsDir, 'react-quill.js.map'),
+  },
+  {
+    from: path.resolve(pkg, 'dist', 'quill.snow.css'),
+    to: path.resolve(assetsDir, 'quill.snow.css'),
+  },
+  {
+    from: path.resolve(pkg, 'dist', 'quill.bubble.css'),
+    to: path.resolve(assetsDir, 'quill.bubble.css'),
+  },
+  {
+    from: path.resolve(pkg, 'dist', 'quill.core.css'),
+    to: path.resolve(assetsDir, 'quill.core.css'),
+  },
 ];
 
 fs.mkdirSync(assetsDir, { recursive: true });
@@ -24,5 +39,3 @@ for (const { from, to } of filesToCopy) {
   }
   fs.copyFileSync(from, to);
 }
-
-

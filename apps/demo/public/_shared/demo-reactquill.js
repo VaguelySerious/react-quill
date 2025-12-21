@@ -39,5 +39,3 @@ function mountReactQuill(rootEl, opts) {
 
   throw new Error('Unsupported ReactDOM API (expected createRoot or render).');
 }
-
-

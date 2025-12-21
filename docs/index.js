@@ -53,17 +53,13 @@ class Editor extends React.Component {
 
   onEditorFocus = (range, source) => {
     this.setState({
-      events: [`[${source}] focus(${this.formatRange(range)})`].concat(
-        this.state.events
-      ),
+      events: [`[${source}] focus(${this.formatRange(range)})`].concat(this.state.events),
     });
   };
 
   onEditorBlur = (previousRange, source) => {
     this.setState({
-      events: [`[${source}] blur(${this.formatRange(previousRange)})`].concat(
-        this.state.events
-      ),
+      events: [`[${source}] blur(${this.formatRange(previousRange)})`].concat(this.state.events),
     });
   };
 
@@ -107,15 +103,9 @@ class Editor extends React.Component {
     var selection = this.formatRange(state.selection);
     return (
       <div>
-        <button onClick={this.onToggle}>
-          {enabled ? 'Disable' : 'Enable'}
-        </button>
-        <button onClick={this.onToggleReadOnly}>
-          Set {readOnly ? 'read/Write' : 'read-only'}
-        </button>
-        <button onClick={this.onSetContents}>
-          Fill contents programmatically
-        </button>
+        <button onClick={this.onToggle}>{enabled ? 'Disable' : 'Enable'}</button>
+        <button onClick={this.onToggleReadOnly}>Set {readOnly ? 'read/Write' : 'read-only'}</button>
+        <button onClick={this.onSetContents}>Fill contents programmatically</button>
         <button disabled={true}>Selection: ({selection})</button>
       </div>
     );

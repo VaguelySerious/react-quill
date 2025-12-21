@@ -1,3 +1,4 @@
+var process = { env: { NODE_ENV: "production" } };
 var ReactQuill = (function (exports, React) {
 	'use strict';
 
@@ -17644,13 +17645,7 @@ var ReactQuill = (function (exports, React) {
 	    Changing one of these props should cause a full re-render and a
 	    re-instantiation of the Quill editor.
 	    */
-	    this.dirtyProps = [
-	      "modules",
-	      "formats",
-	      "bounds",
-	      "theme",
-	      "children"
-	    ];
+	    this.dirtyProps = ["modules", "formats", "bounds", "theme", "children"];
 	    /*
 	    Changing one of these props should cause a regular update. These are mostly
 	    props that act on the container, rather than the quillized editing area.
@@ -17687,12 +17682,7 @@ var ReactQuill = (function (exports, React) {
 	          this.unprivilegedEditor
 	        );
 	      } else if (eventName === "selection-change") {
-	        (_b = this.onEditorChangeSelection) == null ? void 0 : _b.call(
-	          this,
-	          rangeOrDelta,
-	          source,
-	          this.unprivilegedEditor
-	        );
+	        (_b = this.onEditorChangeSelection) == null ? void 0 : _b.call(this, rangeOrDelta, source, this.unprivilegedEditor);
 	      }
 	    };
 	    const value = this.isControlled() ? props.value : props.defaultValue;
@@ -17700,9 +17690,7 @@ var ReactQuill = (function (exports, React) {
 	  }
 	  validateProps(props) {
 	    if (React.Children.count(props.children) > 1)
-	      throw new Error(
-	        "The Quill editing area can only be composed of a single React element."
-	      );
+	      throw new Error("The Quill editing area can only be composed of a single React element.");
 	    if (React.Children.count(props.children)) {
 	      const child = React.Children.only(props.children);
 	      if ((child == null ? void 0 : child.type) === "textarea")

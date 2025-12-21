@@ -40,21 +40,9 @@ namespace ReactQuill {
       source: EmitterSource,
       editor: UnprivilegedEditor
     ): void;
-    onChangeSelection?(
-      selection: Range,
-      source: EmitterSource,
-      editor: UnprivilegedEditor
-    ): void;
-    onFocus?(
-      selection: Range,
-      source: EmitterSource,
-      editor: UnprivilegedEditor
-    ): void;
-    onBlur?(
-      previousSelection: Range,
-      source: EmitterSource,
-      editor: UnprivilegedEditor
-    ): void;
+    onChangeSelection?(selection: Range, source: EmitterSource, editor: UnprivilegedEditor): void;
+    onFocus?(selection: Range, source: EmitterSource, editor: UnprivilegedEditor): void;
+    onBlur?(previousSelection: Range, source: EmitterSource, editor: UnprivilegedEditor): void;
     onKeyDown?: React.EventHandler<any>;
     onKeyPress?: React.EventHandler<any>;
     onKeyUp?: React.EventHandler<any>;
@@ -104,13 +92,7 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
   Changing one of these props should cause a full re-render and a
   re-instantiation of the Quill editor.
   */
-  dirtyProps: (keyof ReactQuillProps)[] = [
-    'modules',
-    'formats',
-    'bounds',
-    'theme',
-    'children',
-  ];
+  dirtyProps: (keyof ReactQuillProps)[] = ['modules', 'formats', 'bounds', 'theme', 'children'];
 
   /*
   Changing one of these props should cause a regular update. These are mostly
@@ -183,9 +165,7 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
 
   validateProps(props: ReactQuillProps): void {
     if (React.Children.count(props.children) > 1)
-      throw new Error(
-        'The Quill editing area can only be composed of a single React element.'
-      );
+      throw new Error('The Quill editing area can only be composed of a single React element.');
 
     if (React.Children.count(props.children)) {
       const child = React.Children.only(props.children);
@@ -513,11 +493,7 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
         this.unprivilegedEditor!
       );
     } else if (eventName === 'selection-change') {
-      this.onEditorChangeSelection?.(
-        rangeOrDelta as RangeStatic,
-        source,
-        this.unprivilegedEditor!
-      );
+      this.onEditorChangeSelection?.(rangeOrDelta as RangeStatic, source, this.unprivilegedEditor!);
     }
   };
 
@@ -585,5 +561,3 @@ function postpone(fn: (value: void) => void) {
 }
 
 export default ReactQuill;
-
-

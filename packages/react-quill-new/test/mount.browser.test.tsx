@@ -21,5 +21,3 @@ describe('ReactQuill (browser)', () => {
     host.remove();
   });
 });
-
-

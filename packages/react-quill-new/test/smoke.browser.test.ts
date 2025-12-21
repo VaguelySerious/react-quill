@@ -6,5 +6,3 @@ describe('react-quill-new (browser)', () => {
     expect(typeof document).toBe('object');
   });
 });
-
-

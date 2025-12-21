@@ -5,8 +5,8 @@
     "react-quill-new": "workspace:*"
   },
   "scripts": {
-    "build": "node ./scripts/sync-assets.mjs",
-    "dev": "node ./scripts/sync-assets.mjs && npx --yes serve public",
+    "build": "pnpm --filter react-quill-new build && node ./scripts/sync-assets.mjs",
+    "dev": "pnpm --filter react-quill-new build && node ./scripts/sync-assets.mjs && npx --yes serve public",
     "test": "node -e \"console.log('no tests')\"",
     "clean": "rimraf public/assets"
   },
@@ -14,5 +14,3 @@
     "rimraf": "^6.0.1"
   }
 }
-
-

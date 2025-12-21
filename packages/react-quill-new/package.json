@@ -13,16 +13,8 @@
   },
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "files": [
-    "dist/",
-    "lib/",
-    "README.md",
-    "CHANGELOG.md",
-    "LICENSE"
-  ],
-  "sideEffects": [
-    "*.css"
-  ],
+  "files": ["dist/", "lib/", "README.md", "CHANGELOG.md", "LICENSE"],
+  "sideEffects": ["*.css"],
   "scripts": {
     "build": "pnpm run build:lib && pnpm run build:dist && pnpm run build:css",
     "build:lib": "tsup --config tsup.config.ts",
