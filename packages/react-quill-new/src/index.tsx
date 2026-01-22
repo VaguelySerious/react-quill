@@ -53,6 +53,12 @@ namespace ReactQuill {
     tabIndex?: number;
     theme?: string;
     value?: Value;
+    /**
+     * If false, uses editor.root.innerHTML instead of getSemanticHTML().
+     * This preserves non-semantic elements like <style> tags.
+     * @default true
+     */
+    useSemanticHTML?: boolean;
   }
 
   export interface UnprivilegedEditor {
@@ -111,6 +117,7 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
     'onKeyPress',
     'onKeyDown',
     'onKeyUp',
+    'useSemanticHTML',
   ];
 
   static defaultProps = {
@@ -487,7 +494,9 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
   ) => {
     if (eventName === 'text-change') {
       this.onEditorChangeText?.(
-        this.editor!.getSemanticHTML(),
+        this.props.useSemanticHTML !== false
+          ? this.editor!.getSemanticHTML()
+          : this.editor!.root.innerHTML,
         rangeOrDelta as DeltaStatic,
         source,
         this.unprivilegedEditor!
@@ -507,7 +516,11 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
 
     // We keep storing the same type of value as what the user gives us,
     // so that value comparisons will be more stable and predictable.
-    const nextContents = this.isDelta(this.value) ? editor.getContents() : editor.getSemanticHTML();
+    const nextContents = this.isDelta(this.value)
+      ? editor.getContents()
+      : this.props.useSemanticHTML !== false
+        ? editor.getSemanticHTML()
+        : editor.getHTML();
 
     if (nextContents !== this.getEditorContents()) {
       // Taint this `delta` object, so we can recognize whether the user
