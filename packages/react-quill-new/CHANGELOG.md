@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.8.2
+
+### Patch Changes
+
+- [`7aff3d0`](https://github.com/VaguelySerious/react-quill/commit/7aff3d031ac81504926ccc79ef9319b720000fb2) Thanks [@VaguelySerious](https://github.com/VaguelySerious)! - Update Quill dependency from 2.0.2 to 2.0.3
+
 ## 3.8.1
 
 ### Patch Changes
