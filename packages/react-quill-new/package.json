@@ -1,6 +1,6 @@
 {
   "name": "react-quill-new",
-  "version": "3.8.1",
+  "version": "3.8.2",
   "description": "The Quill rich-text editor as a React component.",
   "author": "VaguelySerious <mittgfu@gmail.com>, zenoamaro <zenoamaro@gmail.com>, Alex Krolick <alex@alexkrolick.com>",
   "license": "MIT",
