@@ -1,10 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { createRequire } from 'node:module';
 
-const repoRoot = path.resolve(new URL('.', import.meta.url).pathname, '..', '..', '..');
-const pkgRoot = path.resolve(repoRoot, 'packages', 'react-quill-new');
+const require = createRequire(import.meta.url);
+const pkgRoot = path.resolve(new URL('.', import.meta.url).pathname, '..');
 const distDir = path.resolve(pkgRoot, 'dist');
-const quillDistDir = path.resolve(repoRoot, 'node_modules', 'quill', 'dist');
+
+// Find quill package dynamically (works with pnpm's node_modules structure)
+const quillPkgPath = require.resolve('quill/package.json');
+const quillDistDir = path.resolve(path.dirname(quillPkgPath), 'dist');
 
 const files = [
   'quill.core.css',
