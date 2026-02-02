@@ -14,11 +14,13 @@
       import React from 'https://esm.sh/react@19';
       import ReactDOM from 'https://esm.sh/react-dom@19';
       import { createRoot } from 'https://esm.sh/react-dom@19/client';
+      import * as jsxRuntime from 'https://esm.sh/react@19/jsx-runtime';
 
       // Expose as globals for the IIFE bundle
       window.React = React;
       window.ReactDOM = ReactDOM;
       window.ReactDOM.createRoot = createRoot;
+      window.jsxRuntime = jsxRuntime;
 
       // Load react-quill bundle
       const bundleScript = document.createElement('script');

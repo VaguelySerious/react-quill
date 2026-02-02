@@ -13,6 +13,19 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 
+    <!-- jsxRuntime shim for React 16 (jsx-runtime was added in React 17) -->
+    <script>
+      window.jsxRuntime = {
+        jsx: function(type, props, key) {
+          return React.createElement(type, Object.assign({}, props, { key: key }));
+        },
+        jsxs: function(type, props, key) {
+          return React.createElement(type, Object.assign({}, props, { key: key }));
+        },
+        Fragment: React.Fragment
+      };
+    </script>
+
     <!-- react-quill-new dist bundle -->
     <script src="/assets/react-quill.js"></script>
     <script src="/_shared/demo-reactquill.js"></script>

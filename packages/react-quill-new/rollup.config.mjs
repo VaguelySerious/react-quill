@@ -11,7 +11,7 @@ import esbuild from 'rollup-plugin-esbuild';
  */
 export default {
   input: 'src/index.tsx',
-  external: ['react', 'react-dom'],
+  external: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
   plugins: [
     resolve({
       browser: true,
@@ -41,6 +41,8 @@ export default {
     globals: {
       react: 'React',
       'react-dom': 'ReactDOM',
+      'react/jsx-runtime': 'jsxRuntime',
+      'react/jsx-dev-runtime': 'jsxRuntime',
     },
   },
 };

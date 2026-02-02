@@ -13,6 +13,19 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
 
+    <!-- jsxRuntime shim (React 18 UMD doesn't expose jsx-runtime as global) -->
+    <script>
+      window.jsxRuntime = {
+        jsx: function(type, props, key) {
+          return React.createElement(type, Object.assign({}, props, { key: key }));
+        },
+        jsxs: function(type, props, key) {
+          return React.createElement(type, Object.assign({}, props, { key: key }));
+        },
+        Fragment: React.Fragment
+      };
+    </script>
+
     <!-- react-quill-new dist bundle -->
     <script src="/assets/react-quill.js"></script>
     <script src="/_shared/demo-reactquill.js"></script>
