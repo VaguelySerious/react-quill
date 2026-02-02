@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.8.3
+
+### Patch Changes
+
+- [`af81b20`](https://github.com/VaguelySerious/react-quill/commit/af81b2054366197722104135380b124f11bb6800) Thanks [@VaguelySerious](https://github.com/VaguelySerious)! - Fix CSS files missing from bundled package
+
 ## 3.8.2
 
 ### Patch Changes
@@ -20,4 +26,3 @@
 - Repository migrated to pnpm + turborepo + changesets
 - Browser bundle build migrated away from webpack
 - Test migration started toward Vitest + Playwright browser mode
-
