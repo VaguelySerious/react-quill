@@ -9,15 +9,30 @@
   <body>
     <div id="app"></div>
 
-    <!-- React 19 UMD (update versions if needed) -->
-    <script src="https://unpkg.com/react@19/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@19/umd/react-dom.development.js" crossorigin></script>
+    <!-- React 19 via ESM (React 19 dropped UMD builds) -->
+    <script type="module">
+      import React from 'https://esm.sh/react@19';
+      import ReactDOM from 'https://esm.sh/react-dom@19';
+      import { createRoot } from 'https://esm.sh/react-dom@19/client';
 
-    <!-- react-quill-new dist bundle -->
-    <script src="/assets/react-quill.js"></script>
-    <script src="/_shared/demo-reactquill.js"></script>
-    <script>
-      mountReactQuill(document.getElementById('app'), { title: 'React 19 + Quill 2' });
+      // Expose as globals for the IIFE bundle
+      window.React = React;
+      window.ReactDOM = ReactDOM;
+      window.ReactDOM.createRoot = createRoot;
+
+      // Load react-quill bundle
+      const bundleScript = document.createElement('script');
+      bundleScript.src = '/assets/react-quill.js';
+      bundleScript.onload = () => {
+        // Load shared demo script
+        const demoScript = document.createElement('script');
+        demoScript.src = '/_shared/demo-reactquill.js';
+        demoScript.onload = () => {
+          mountReactQuill(document.getElementById('app'), { title: 'React 19 + Quill 2' });
+        };
+        document.body.appendChild(demoScript);
+      };
+      document.body.appendChild(bundleScript);
     </script>
   </body>
 </html>
