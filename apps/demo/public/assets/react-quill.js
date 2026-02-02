@@ -17662,7 +17662,8 @@ var ReactQuill = (function (exports, React) {
 	      "onBlur",
 	      "onKeyPress",
 	      "onKeyDown",
-	      "onKeyUp"
+	      "onKeyUp",
+	      "useSemanticHTML"
 	    ];
 	    this.state = {
 	      generation: 0
@@ -17676,7 +17677,7 @@ var ReactQuill = (function (exports, React) {
 	      if (eventName === "text-change") {
 	        (_a = this.onEditorChangeText) == null ? void 0 : _a.call(
 	          this,
-	          this.editor.getSemanticHTML(),
+	          this.props.useSemanticHTML !== false ? this.editor.getSemanticHTML() : this.editor.root.innerHTML,
 	          rangeOrDelta,
 	          source,
 	          this.unprivilegedEditor
@@ -17933,7 +17934,7 @@ var ReactQuill = (function (exports, React) {
 	  onEditorChangeText(value, delta, source, editor) {
 	    var _a, _b;
 	    if (!this.editor) return;
-	    const nextContents = this.isDelta(this.value) ? editor.getContents() : editor.getSemanticHTML();
+	    const nextContents = this.isDelta(this.value) ? editor.getContents() : this.props.useSemanticHTML !== false ? editor.getSemanticHTML() : editor.getHTML();
 	    if (nextContents !== this.getEditorContents()) {
 	      this.lastDeltaChangeSet = delta;
 	      this.value = nextContents;
