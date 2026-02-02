@@ -1,6 +1,6 @@
 {
   "name": "react-quill-new",
-  "version": "3.8.0",
+  "version": "3.8.1",
   "description": "The Quill rich-text editor as a React component.",
   "author": "VaguelySerious <mittgfu@gmail.com>, zenoamaro <zenoamaro@gmail.com>, Alex Krolick <alex@alexkrolick.com>",
   "license": "MIT",
@@ -13,8 +13,16 @@
   },
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "files": ["dist/", "lib/", "README.md", "CHANGELOG.md", "LICENSE"],
-  "sideEffects": ["*.css"],
+  "files": [
+    "dist/",
+    "lib/",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
     "build": "pnpm run build:lib && pnpm run build:dist && pnpm run build:css",
     "build:lib": "tsup --config tsup.config.ts",
