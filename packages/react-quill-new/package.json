@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "lodash-es": "^4.17.21",
-    "quill": "~2.0.2"
+    "quill": "~2.0.3"
   },
   "peerDependencies": {
     "quill-delta": "^5.1.0",
