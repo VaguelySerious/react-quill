@@ -46,6 +46,13 @@ namespace ReactQuill {
     onKeyDown?: React.EventHandler<any>;
     onKeyPress?: React.EventHandler<any>;
     onKeyUp?: React.EventHandler<any>;
+    /**
+     * If true, converts the &nbsp; entities emitted by getSemanticHTML()
+     * to regular spaces. This may collapse repeated or leading whitespace
+     * when the resulting HTML is rendered without white-space preservation.
+     * @default false
+     */
+    normalizeSemanticSpaces?: boolean;
     placeholder?: string;
     preserveWhitespace?: boolean;
     readOnly?: boolean;
@@ -117,6 +124,7 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
     'onKeyPress',
     'onKeyDown',
     'onKeyUp',
+    'normalizeSemanticSpaces',
     'useSemanticHTML',
   ];
 
@@ -486,6 +494,15 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
     );
   }
 
+  getEditorHTML(editor: UnprivilegedEditor): string {
+    if (this.props.useSemanticHTML === false) {
+      return editor.getHTML();
+    }
+
+    const html = editor.getSemanticHTML();
+    return this.props.normalizeSemanticSpaces ? html.replace(/&nbsp;/g, ' ') : html;
+  }
+
   onEditorChange = (
     eventName: 'text-change' | 'selection-change',
     rangeOrDelta: Range | DeltaStatic,
@@ -494,9 +511,7 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
   ) => {
     if (eventName === 'text-change') {
       this.onEditorChangeText?.(
-        this.props.useSemanticHTML !== false
-          ? this.editor!.getSemanticHTML()
-          : this.editor!.root.innerHTML,
+        this.getEditorHTML(this.unprivilegedEditor!),
         rangeOrDelta as DeltaStatic,
         source,
         this.unprivilegedEditor!
@@ -518,9 +533,7 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
     // so that value comparisons will be more stable and predictable.
     const nextContents = this.isDelta(this.value)
       ? editor.getContents()
-      : this.props.useSemanticHTML !== false
-        ? editor.getSemanticHTML()
-        : editor.getHTML();
+      : this.getEditorHTML(editor);
 
     if (nextContents !== this.getEditorContents()) {
       // Taint this `delta` object, so we can recognize whether the user
